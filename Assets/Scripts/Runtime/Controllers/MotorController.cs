@@ -5,11 +5,10 @@ using UnityEngine.Events;
 
 public class MotorController : MonoBehaviour
 {
-    private Rigidbody2D m_rigidbody;        //unit rigidbody
+    private Rigidbody2D m_rigidbody;
     private Vector2 m_currentTargetPoint;
 
     [SerializeField] private float m_motorSpeed = 0;
-    [SerializeField] private float m_reboundTime = 0;
 
     public UnityEvent onPointReached;   //should begin attack/defend sequence etc
 
@@ -24,19 +23,13 @@ public class MotorController : MonoBehaviour
             //m_motorSpeed = defaultSpeed for type of unit;
             m_motorSpeed = 1f;  //temporary
         }
-
-        if (m_reboundTime == 0)
-        {
-            //m_reboundTime = default for type of unit;
-            m_reboundTime = 1f;
-        }
     }
     
     /// <summary>
     /// Move towards specified point, unit must have rigidbody.
     /// Note: Method assumes there will be only trigger colliders within the field of movement.
     /// </summary>
-    /// <param name="targetPoint">Vector position to move to</param>
+    /// <param name="targetPoint">Vector position to move to.</param>
     public void MoveToPoint(Vector2 targetPoint)
     {
         //If rigidbody exists, adjust velocity and set new target point
@@ -45,7 +38,7 @@ public class MotorController : MonoBehaviour
             m_rigidbody.velocity = targetPoint.normalized * m_motorSpeed;
             m_currentTargetPoint = targetPoint;
 
-            StartCoroutine(CheckIfPointReached());
+            StartCoroutine(StopIfPointReached());
         }
         else
         {
@@ -53,7 +46,7 @@ public class MotorController : MonoBehaviour
         }
     }
 
-    private IEnumerator CheckIfPointReached()
+    private IEnumerator StopIfPointReached()
     {
         yield return new WaitForEndOfFrame();
 
@@ -66,25 +59,30 @@ public class MotorController : MonoBehaviour
         }
         else
         {
-            StartCoroutine(CheckIfPointReached());
+            StartCoroutine(StopIfPointReached());
         }
     }
 
-    //Move towards point with reference to object, object should have float for range of interaction
-    public void MoveToTarget(ICombatTargetFinding targetUnit)
+    //Move towards point given a target and interaction range
+    public void MoveToTarget(GameObject targetUnit, float interactRange)
+    {
+        
+    }
+
+    //Move out of range of the target unit - consider wall collisions
+    public void MoveAwayFromTarget(GameObject targetUnit)
+    {
+
+    }
+
+    //Move away from all targets (tentative)
+    public void MoveAwayAll()
     {
 
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //StartCoroutine(Rebound());
+        
     }
-
-    /*private IEnumerator Rebound()
-    {
-        yield return new WaitForSeconds(m_reboundTime);
-        MoveToPoint(m_currentTargetPoint);
-        Debug.Log("Rebound in " + m_reboundTime + "s.");
-    }*/
 }
