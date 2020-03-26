@@ -18,7 +18,7 @@ public class AutoTester : MonoBehaviour
     {
         if (test)
         {
-            obj.MoveToPointWithRigidbody(Vector2.one * 5);
+            obj.MoveToPoint(Vector2.one * 5);
             test = !test;
         }
     }
