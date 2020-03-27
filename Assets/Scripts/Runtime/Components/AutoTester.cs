@@ -18,7 +18,8 @@ public class AutoTester : MonoBehaviour
     {
         if (test)
         {
-            obj.MoveToPoint(Vector2.one * 5);
+            //obj.MoveToPoint(transform.position);
+            obj.MoveToTarget(gameObject, 5f);
             test = !test;
         }
     }

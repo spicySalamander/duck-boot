@@ -12,6 +12,10 @@ public class MotorController : MonoBehaviour
 
     public UnityEvent onPointReached;   //should begin attack/defend sequence etc
 
+    //DEBUG
+    Vector3 start;
+    Vector3 end;
+
     //Note: sprite size must be taken into account
 
     private void Start()
@@ -25,6 +29,11 @@ public class MotorController : MonoBehaviour
         }
     }
     
+    public bool InMotion()
+    {
+        return m_rigidbody.velocity != Vector2.zero;
+    }
+
     /// <summary>
     /// Move towards specified point, unit must have rigidbody.
     /// Note: Method assumes there will be only trigger colliders within the field of movement.
@@ -33,17 +42,26 @@ public class MotorController : MonoBehaviour
     public void MoveToPoint(Vector2 targetPoint)
     {
         //If rigidbody exists, adjust velocity and set new target point
-        if (GetComponent<Rigidbody2D>())
+        if (GetComponent<Rigidbody2D>() && !InMotion())
         {
-            m_rigidbody.velocity = targetPoint.normalized * m_motorSpeed;
+            //relative to unit position
             m_currentTargetPoint = targetPoint;
+
+            m_rigidbody.velocity = (m_currentTargetPoint - m_rigidbody.position).normalized * m_motorSpeed;
+
+            Debug.Log("Current velocity set to " + m_rigidbody.velocity);
 
             StartCoroutine(StopIfPointReached());
         }
         else
         {
-            Debug.LogWarning("There is no rigidbody present.");
+            Debug.LogWarning("Object is either still in motion or there is no rigidbody present.");
         }
+    }
+
+    private void Update()
+    {
+        Debug.DrawLine(start, end);
     }
 
     private IEnumerator StopIfPointReached()
@@ -51,7 +69,7 @@ public class MotorController : MonoBehaviour
         yield return new WaitForEndOfFrame();
 
         //If target point is reached before, stop movement
-        if (Mathf.Abs(m_rigidbody.position.magnitude - m_currentTargetPoint.magnitude) <= m_rigidbody.velocity.magnitude * Time.deltaTime)
+        if (Mathf.Abs((m_currentTargetPoint - m_rigidbody.position).magnitude) <= m_rigidbody.velocity.magnitude * Time.deltaTime)
         {
             m_rigidbody.velocity = Vector2.zero;
             m_rigidbody.position = m_currentTargetPoint;
@@ -66,7 +84,32 @@ public class MotorController : MonoBehaviour
     //Move towards point given a target and interaction range
     public void MoveToTarget(GameObject targetUnit, float interactRange)
     {
-        
+        if (targetUnit.GetComponent<Rigidbody2D>())
+        {
+            Rigidbody2D targetRigidbody = targetUnit.GetComponent<Rigidbody2D>();
+            Vector2 rawVectorFromTarget = m_rigidbody.position - targetRigidbody.position;
+
+            Debug.Log("Distance between vectors are " + rawVectorFromTarget);
+            start = Vector3.zero;
+            end = rawVectorFromTarget;
+
+            float currDistanceFromTarget = Mathf.Abs(rawVectorFromTarget.magnitude);
+
+            //find new point if not at interaction range
+            if (currDistanceFromTarget != interactRange)
+            {
+                //angle of the current position from target
+                var angleFromTarget = Mathf.Atan2(rawVectorFromTarget.y, rawVectorFromTarget.x);
+                Vector2 newTarget = targetRigidbody.position + (new Vector2(Mathf.Cos(angleFromTarget), Mathf.Sin(angleFromTarget)) * interactRange);
+
+                MoveToPoint(newTarget);
+                Debug.Log("Angle from target is " + angleFromTarget * Mathf.Rad2Deg);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Warning: Rigidbody is missing from target object.");
+        }
     }
 
     //Move out of range of the target unit - consider wall collisions
