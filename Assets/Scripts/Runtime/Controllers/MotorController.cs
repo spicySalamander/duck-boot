@@ -112,17 +112,14 @@ public class MotorController : MonoBehaviour
         }
     }
 
-    //Move out of range of the target unit - consider wall collisions
+    //Move out of range of the target unit using target's interact range
+    //- consider wall collisions
     public void MoveAwayFromTarget(GameObject targetUnit)
     {
 
     }
 
-    //Move away from all targets (tentative)
-    public void MoveAwayAll()
-    {
-
-    }
+    //private Vector2 
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
