@@ -18,8 +18,11 @@ public class Clothing : ScriptableObject
     // How FAST something can attack
     public int speed;
 
+    // What something looks like
+    public Sprite artwork;
+
     public void Print()
     {
-        Debug.Log(name + " - " + "This card is this cool: " + coolness);
+        Debug.Log(name + " - " + "This item is this cool: " + coolness + " this cute:" + cuteness + " this strong:" + strength + " this fast:" + speed);
     }
 }
