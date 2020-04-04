@@ -42,7 +42,7 @@ public class Motor : MonoBehaviour
     public void MoveToPoint(Vector2 targetPoint)
     {
         //If rigidbody exists, adjust velocity and set new target point
-        if (GetComponent<Rigidbody2D>() && !InMotion())
+        if (GetComponent<Rigidbody2D>()) //&& !InMotion())
         {
             //relative to unit position
             m_currentTargetPoint = targetPoint;
@@ -55,7 +55,7 @@ public class Motor : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Object is either still in motion or there is no rigidbody present.");
+            Debug.LogWarning("There is no rigidbody present.");
         }
     }
 

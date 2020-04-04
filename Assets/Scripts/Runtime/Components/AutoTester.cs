@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AutoTester : MonoBehaviour
 {
-    public Health obj;
+    public Motor obj;
     public bool test;
 
     // Start is called before the first frame update
@@ -18,9 +18,9 @@ public class AutoTester : MonoBehaviour
     {
         if (test)
         {
-            //obj.MoveToPoint(transform.position);
-            obj.TakeDamage(5);
-            test = !test;
+            obj.MoveToTarget(gameObject, 5f);
+            //obj.TakeDamage(5);
+            //test = !test;
         }
     }
 
