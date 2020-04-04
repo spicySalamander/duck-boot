@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AttackRanges:
   - 1
-  - 8
+  - 5
   - 1
   m_AttackCoolDown:
   - 2

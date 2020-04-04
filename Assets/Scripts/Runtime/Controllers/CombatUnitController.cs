@@ -41,19 +41,25 @@ public class CombatUnitController: MonoBehaviour
         m_Enemies = CombatManager.Instance.m_UnitPool[((int)m_MyTeam + 1) % 2];
     }
 
+    private void FixedUpdate()
+    {
+        if (m_JumpToTarget)
+        {
+            JumpToTarget();
+        }
+        else if(!m_IsAttacking)
+        {
+            Movement();
+        }
+    }
+
     private void Update()
     {
         if (m_IsAttacking)
         {
-            Debug.DrawLine(transform.position, m_CurrentAttackTarget.position, Color.red);
-        }
-        else if (m_JumpToTarget)
-        {
-            JumpToTarget();
-        }
-        else
-        {
-            Movement();
+            Vector3 colorChangePoint = Vector3.Lerp(transform.position, m_CurrentAttackTarget.position, .5f);
+            Debug.DrawLine(transform.position, colorChangePoint, Color.green);
+            Debug.DrawLine(colorChangePoint, m_CurrentAttackTarget.position, Color.yellow);
         }
     }
 
@@ -77,8 +83,7 @@ public class CombatUnitController: MonoBehaviour
             // check attack range
             if ((m_CurrentAttackTarget.position - transform.position).magnitude > CombatManager.Instance.m_AttackRanges[(int)m_Type])
             {
-                //m_MotorScript.MoveToPoint(m_CurrentAttackTarget.position);
-                MoveToPoint(m_CurrentAttackTarget.position);
+                m_MotorScript.MoveToPoint(m_CurrentAttackTarget.position);
             }
             else
             {
@@ -91,8 +96,14 @@ public class CombatUnitController: MonoBehaviour
         }
         else if (m_AttackCoolingDown)
         {
-            //m_MotorScript.MoveToPoint(targetPosition);
-            MoveToPoint(targetPosition);
+            if(CombatManager.UnitTypes.Assassin == m_Type)
+            {
+                if ((m_CurrentAttackTarget.position - transform.position).magnitude > CombatManager.Instance.m_AttackRanges[(int)m_Type])
+                {
+                    m_MotorScript.MoveToPoint(m_CurrentAttackTarget.position);
+                }
+            }
+            m_MotorScript.MoveToPoint(targetPosition);
         }
     }
 
@@ -117,13 +128,5 @@ public class CombatUnitController: MonoBehaviour
         {
             m_JumpToTarget = false;
         }
-    }
-
-    /// <summary>
-    /// test
-    /// </summary>
-    private void MoveToPoint(Vector3 targetPosition)
-    {
-        transform.position += (targetPosition - transform.position).normalized * Time.deltaTime;
     }
 }
