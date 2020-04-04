@@ -6,19 +6,22 @@ using UnityEngine;
 [Serializable]
 public class AssassinFindTarget : MonoBehaviour, ICombatTargetFinding
 {
+
+    private Transform m_CurrentTarget;
+
     public Vector3 GetTargetPosition(List<CombatUnitController> enemies, List<CombatUnitController> allies, float attackRange)
     {
-        Vector3 farthestEnemyPosition = transform.position;
+        Transform farthestEnemyPosition = transform;
         if (enemies.Count > 0)
         {
             for (int i = 0; i < enemies.Count; i++)
             {
-                if ((enemies[i].transform.position - transform.position).magnitude > (farthestEnemyPosition - transform.position).magnitude)
+                if ((enemies[i].transform.position - transform.position).magnitude > (farthestEnemyPosition.position - transform.position).magnitude)
                 {
-                    farthestEnemyPosition = enemies[i].transform.position;
+                    farthestEnemyPosition = enemies[i].transform;
                 }
             }
-            return farthestEnemyPosition - (transform.position - farthestEnemyPosition) * attackRange;
+            return farthestEnemyPosition.position - (transform.position - farthestEnemyPosition.position) * attackRange;
         }
         else
         {
@@ -29,15 +32,29 @@ public class AssassinFindTarget : MonoBehaviour, ICombatTargetFinding
 
     public Transform GetAttackTarget(List<CombatUnitController> enemies, Vector3 targetPosition)
     {
-        Transform attackTarget = enemies[0].transform;
-        if (enemies.Count > 1)
+        if (null == m_CurrentTarget)
         {
-            for (int i = 1; i < enemies.Count; i++)
+            Transform attackTarget = enemies[0].transform;
+            if (enemies.Count > 1)
             {
-                attackTarget = (enemies[i].transform.position - targetPosition).magnitude < (attackTarget.position - targetPosition).magnitude ?
-                    enemies[i].transform : attackTarget;
+                for (int i = 1; i < enemies.Count; i++)
+                {
+                    attackTarget = (enemies[i].transform.position - targetPosition).magnitude < (attackTarget.position - targetPosition).magnitude ?
+                        enemies[i].transform : attackTarget;
+                }
             }
+            m_CurrentTarget = attackTarget;
+            return attackTarget;
         }
-        return attackTarget;
+        else if (!m_CurrentTarget.gameObject.activeInHierarchy)
+        {
+            m_CurrentTarget = null;
+            return GetAttackTarget(enemies, targetPosition);
+        }
+        else
+        {
+
+            return m_CurrentTarget;
+        }
     }
 }
