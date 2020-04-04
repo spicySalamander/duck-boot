@@ -15,6 +15,8 @@ public class CombatUnitController: MonoBehaviour
     private Transform m_CurrentAttackTarget;
     private SpriteRenderer m_SpriteRenderer;
     private bool m_IsAttacking;
+    private bool m_JumpToTarget;
+    private Vector3 m_JumpTargetPosition;
     private bool m_AttackCoolingDown;
 
     //for test only
@@ -45,6 +47,10 @@ public class CombatUnitController: MonoBehaviour
         {
             Debug.DrawLine(transform.position, m_CurrentAttackTarget.position, Color.red);
         }
+        else if (m_JumpToTarget)
+        {
+            JumpToTarget();
+        }
         else
         {
             Movement();
@@ -57,10 +63,16 @@ public class CombatUnitController: MonoBehaviour
         if (!m_AttackCoolingDown)
         {
             // check Target
-            Transform targetCheck = m_TargetFinder.GetAttackTarget(m_Enemies, targetPosition);
-            if (targetCheck != m_CurrentAttackTarget)
+            Transform newTarget = m_TargetFinder.GetAttackTarget(m_Enemies, targetPosition);
+            if (newTarget != m_CurrentAttackTarget)
             {
-                m_CurrentAttackTarget = m_TargetFinder.GetAttackTarget(m_Enemies, targetPosition);
+                m_CurrentAttackTarget = newTarget;
+                if(m_Type == CombatManager.UnitTypes.Assassin)
+                {
+                    m_JumpToTarget = true;
+                    m_JumpTargetPosition = m_CurrentAttackTarget.position + 
+                        (m_CurrentAttackTarget.position - transform.position).normalized * CombatManager.Instance.m_AttackRanges[(int)m_Type];
+                }
             }
             // check attack range
             if ((m_CurrentAttackTarget.position - transform.position).magnitude > CombatManager.Instance.m_AttackRanges[(int)m_Type])
@@ -94,6 +106,19 @@ public class CombatUnitController: MonoBehaviour
         m_AttackCoolingDown = false;
     }
 
+    private void JumpToTarget()
+    {
+        Vector3 distance = m_JumpTargetPosition - transform.position;
+        if(distance.magnitude > .1f)
+        {
+            transform.position += (m_JumpTargetPosition - transform.position).normalized * 10 * Time.deltaTime;
+        }
+        else
+        {
+            m_JumpToTarget = false;
+        }
+    }
+
     /// <summary>
     /// test
     /// </summary>
@@ -101,5 +126,4 @@ public class CombatUnitController: MonoBehaviour
     {
         transform.position += (targetPosition - transform.position).normalized * Time.deltaTime;
     }
-
 }

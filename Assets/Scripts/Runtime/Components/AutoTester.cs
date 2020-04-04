@@ -19,7 +19,7 @@ public class AutoTester : MonoBehaviour
         if (test)
         {
             //obj.MoveToPoint(transform.position);
-            obj.Hurt(5);
+            //obj.Hurt(5);
             test = !test;
         }
     }
