@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class MotorController : MonoBehaviour
+public class Motor : MonoBehaviour
 {
     private Rigidbody2D m_rigidbody;
     private Vector2 m_currentTargetPoint;
