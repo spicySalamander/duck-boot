@@ -5,13 +5,16 @@ using UnityEngine.Events;
 
 public class Motor : MonoBehaviour
 {
-    private Rigidbody2D m_rigidbody;
-    private Vector2 m_currentTargetPoint;
-
+    private enum FacingDirection { Right, Left }
     [SerializeField] private float m_motorSpeed = 0;
 
-    public UnityEvent onPointReached;   //should begin attack/defend sequence etc
+    private Rigidbody2D m_rigidbody;
+    private Vector2 m_currentTargetPoint;
+    private Rigidbody2D m_currentTarget;
+    private FacingDirection facingDirection;
 
+    public UnityEvent onPointReached;   //should begin attack/defend sequence etc
+    
     //DEBUG
     Vector3 start;
     Vector3 end;
@@ -46,10 +49,18 @@ public class Motor : MonoBehaviour
         {
             //relative to unit position
             m_currentTargetPoint = targetPoint;
-
             m_rigidbody.velocity = (m_currentTargetPoint - m_rigidbody.position).normalized * m_motorSpeed;
 
-            Debug.Log("Current velocity set to " + m_rigidbody.velocity);
+            if (m_rigidbody.velocity.x > 0)
+            {
+                //face right
+                facingDirection = FacingDirection.Right;
+            }
+            else if (m_rigidbody.velocity.x < 0)
+            {
+                //face left
+                facingDirection = FacingDirection.Left;
+            }
 
             StartCoroutine(StopIfPointReached());
         }
@@ -61,7 +72,16 @@ public class Motor : MonoBehaviour
 
     private void Update()
     {
-        Debug.DrawLine(start, end);
+        //Debug.DrawLine(start, end);
+
+        if (facingDirection == FacingDirection.Right)
+        {
+            transform.localScale = Vector3.one;
+        }
+        else
+        {
+            transform.localScale = -Vector3.one;
+        }
     }
 
     private IEnumerator StopIfPointReached()
@@ -73,6 +93,17 @@ public class Motor : MonoBehaviour
         {
             m_rigidbody.velocity = Vector2.zero;
             m_rigidbody.position = m_currentTargetPoint;
+
+            //face enemy at velocity = 0
+            if (m_rigidbody.position.x < m_currentTarget.position.x)
+            {
+                facingDirection = FacingDirection.Right;
+            }
+            else if (m_rigidbody.position.x > m_currentTarget.position.x)
+            {
+                facingDirection = FacingDirection.Left;
+            }
+
             onPointReached.Invoke();
         }
         else
@@ -88,8 +119,9 @@ public class Motor : MonoBehaviour
         {
             Rigidbody2D targetRigidbody = targetUnit.GetComponent<Rigidbody2D>();
             Vector2 rawVectorFromTarget = m_rigidbody.position - targetRigidbody.position;
+            m_currentTarget = targetUnit.GetComponent<Rigidbody2D>();
 
-            Debug.Log("Distance between vectors are " + rawVectorFromTarget);
+            //Debug.Log("Distance between vectors are " + rawVectorFromTarget);
             start = Vector3.zero;
             end = rawVectorFromTarget;
 
@@ -103,7 +135,7 @@ public class Motor : MonoBehaviour
                 Vector2 newTarget = targetRigidbody.position + (new Vector2(Mathf.Cos(angleFromTarget), Mathf.Sin(angleFromTarget)) * interactRange);
 
                 MoveToPoint(newTarget);
-                Debug.Log("Angle from target is " + angleFromTarget * Mathf.Rad2Deg);
+                //Debug.Log("Angle from target is " + angleFromTarget * Mathf.Rad2Deg);
             }
         }
         else
