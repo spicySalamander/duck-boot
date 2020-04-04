@@ -94,14 +94,17 @@ public class Motor : MonoBehaviour
             m_rigidbody.velocity = Vector2.zero;
             m_rigidbody.position = m_currentTargetPoint;
 
-            //face enemy at velocity = 0
-            if (m_rigidbody.position.x < m_currentTarget.position.x)
+            if (m_currentTarget != null)
             {
-                facingDirection = FacingDirection.Right;
-            }
-            else if (m_rigidbody.position.x > m_currentTarget.position.x)
-            {
-                facingDirection = FacingDirection.Left;
+                //face enemy at velocity = 0
+                if (m_rigidbody.position.x < m_currentTarget.position.x)
+                {
+                    facingDirection = FacingDirection.Right;
+                }
+                else if (m_rigidbody.position.x > m_currentTarget.position.x)
+                {
+                    facingDirection = FacingDirection.Left;
+                }
             }
 
             onPointReached.Invoke();
