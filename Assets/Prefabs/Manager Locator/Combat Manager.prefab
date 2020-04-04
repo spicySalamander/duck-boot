@@ -43,9 +43,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b470730759d82949b4ecc8f0a9ed333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CombatStyles:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  m_AttackRanges:
+  - 1
+  - 5
+  - 1
+  m_AttackCoolDown:
+  - 2
+  - 1
+  - 1
+  m_CombatUnitSprites:
+  - {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 21300000, guid: 1ced7f36363e1ee4ea3d0837155258ea, type: 3}
   m_Team1: []
   m_Team2: []
+  m_TeamColors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0.3813858, b: 1, a: 1}

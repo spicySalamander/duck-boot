@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AutoTester : MonoBehaviour
 {
-    public MotorController obj;
+    public Motor obj;
     public bool test;
 
     // Start is called before the first frame update

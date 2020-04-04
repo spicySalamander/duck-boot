@@ -5,5 +5,7 @@ using UnityEngine;
 
 public interface ICombatTargetFinding
 {
-    Vector3 GetTarget(List<Transform> enemies, List<Transform> allies); 
+    Vector3 GetTargetPosition(List<CombatUnitController> enemies, List<CombatUnitController> allies, float attackRange);
+
+    Transform GetAttackTarget(List<CombatUnitController> enemies, Vector3 targetPosition);
 }
