@@ -31,10 +31,34 @@ public class Motor : MonoBehaviour
             m_motorSpeed = 1f;  //temporary
         }
     }
-    
+
+    private void Update()
+    {
+        //Debug.DrawLine(start, end);
+
+        if (facingDirection == FacingDirection.Right)
+        {
+            transform.localScale = Vector3.one;
+        }
+        else
+        {
+            transform.localScale = -Vector3.one;
+        }
+    }
+
     public bool InMotion()
     {
         return m_rigidbody.velocity != Vector2.zero;
+    }
+
+    public void SetTarget(GameObject target)
+    {
+        m_currentTarget = target.GetComponent<Rigidbody2D>();
+    }
+
+    public void RemoveTarget()
+    {
+        m_currentTarget = null;
     }
 
     /// <summary>
@@ -67,20 +91,6 @@ public class Motor : MonoBehaviour
         else
         {
             Debug.LogWarning("There is no rigidbody present.");
-        }
-    }
-
-    private void Update()
-    {
-        //Debug.DrawLine(start, end);
-
-        if (facingDirection == FacingDirection.Right)
-        {
-            transform.localScale = Vector3.one;
-        }
-        else
-        {
-            transform.localScale = -Vector3.one;
         }
     }
 
