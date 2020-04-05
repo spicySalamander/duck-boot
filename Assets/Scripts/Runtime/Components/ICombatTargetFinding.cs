@@ -7,5 +7,5 @@ public interface ICombatTargetFinding
 {
     Vector3 GetTargetPosition(List<CombatUnitController> enemies, List<CombatUnitController> allies, float attackRange);
 
-    Transform GetAttackTarget(List<CombatUnitController> enemies, Vector3 targetPosition);
+    CombatUnitController GetAttackTarget(List<CombatUnitController> enemies, Vector3 targetPosition);
 }

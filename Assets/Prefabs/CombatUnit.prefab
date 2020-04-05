@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4472131144856064733}
   - component: {fileID: 4472131144856064735}
   - component: {fileID: 4472131144856064734}
+  - component: {fileID: 1072783312715555663}
   - component: {fileID: 7330620682310113371}
   m_Layer: 0
   m_Name: CombatUnit
@@ -112,6 +113,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_motorSpeed: 0.2
   onPointReached:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &1072783312715555663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4472131144856064706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aa27e7cd78cfd9418c1c4a6340cf885, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_totalHealth: 5
+  m_currentHealth: 0
+  die:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,

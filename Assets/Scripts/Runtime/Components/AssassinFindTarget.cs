@@ -7,7 +7,7 @@ using UnityEngine;
 public class AssassinFindTarget : MonoBehaviour, ICombatTargetFinding
 {
 
-    private Transform m_CurrentTarget;
+    private CombatUnitController m_CurrentTarget;
 
     public Vector3 GetTargetPosition(List<CombatUnitController> enemies, List<CombatUnitController> allies, float attackRange)
     {
@@ -30,17 +30,17 @@ public class AssassinFindTarget : MonoBehaviour, ICombatTargetFinding
         }
     }
 
-    public Transform GetAttackTarget(List<CombatUnitController> enemies, Vector3 targetPosition)
+    public CombatUnitController GetAttackTarget(List<CombatUnitController> enemies, Vector3 targetPosition)
     {
         if (null == m_CurrentTarget)
         {
-            Transform attackTarget = enemies[0].transform;
+            CombatUnitController attackTarget = enemies[0];
             if (enemies.Count > 1)
             {
                 for (int i = 1; i < enemies.Count; i++)
                 {
-                    attackTarget = (enemies[i].transform.position - targetPosition).magnitude < (attackTarget.position - targetPosition).magnitude ?
-                        enemies[i].transform : attackTarget;
+                    attackTarget = (enemies[i].transform.position - targetPosition).magnitude < (attackTarget.transform.position - targetPosition).magnitude ?
+                        enemies[i] : attackTarget;
                 }
             }
             m_CurrentTarget = attackTarget;

@@ -47,6 +47,7 @@ MonoBehaviour:
   - 1
   - 5
   - 1
+  m_AttackDamage: 010000000100000001000000
   m_AttackCoolDown:
   - 2
   - 1

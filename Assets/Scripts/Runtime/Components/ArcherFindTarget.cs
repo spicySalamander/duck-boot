@@ -49,15 +49,15 @@ public class ArcherFindTarget : MonoBehaviour, ICombatTargetFinding
         }  
     }
 
-    public Transform GetAttackTarget(List<CombatUnitController> enemies, Vector3 targetPosition)
+    public CombatUnitController GetAttackTarget(List<CombatUnitController> enemies, Vector3 targetPosition)
     {
-        Transform attackTarget = enemies[0].transform;
+        CombatUnitController attackTarget = enemies[0];
         if (enemies.Count > 1)
         {
             for (int i = 1; i < enemies.Count; i++)
             {
-                attackTarget = (enemies[i].transform.position - targetPosition).magnitude < (attackTarget.position - targetPosition).magnitude ?
-                    enemies[i].transform : attackTarget;
+                attackTarget = (enemies[i].transform.position - targetPosition).magnitude < (attackTarget.transform.position - targetPosition).magnitude ?
+                    enemies[i] : attackTarget;
             }
         }
         return attackTarget;

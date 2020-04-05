@@ -43,7 +43,7 @@ public class Health : MonoBehaviour
         if (m_currentHealth <= 0)
         {
             m_currentHealth = 0;
-            die.Invoke();
+            //die.Invoke();
         }
 
         return m_currentHealth;

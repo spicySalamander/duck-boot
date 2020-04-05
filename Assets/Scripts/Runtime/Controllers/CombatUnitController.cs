@@ -7,12 +7,13 @@ public class CombatUnitController: MonoBehaviour
     public enum TeamName {Duck, Enemy};
     public CombatManager.UnitTypes m_Type;
     public TeamName m_MyTeam;
+    public Health m_HealthScript;
 
     private Motor m_MotorScript;
     private ICombatTargetFinding m_TargetFinder;
     private List<CombatUnitController> m_Enemies;
     private List<CombatUnitController> m_Allies;
-    private Transform m_CurrentAttackTarget;
+    private CombatUnitController m_CurrentAttackTarget;
     private SpriteRenderer m_SpriteRenderer;
     private bool m_IsAttacking;
     private bool m_JumpToTarget;
@@ -29,6 +30,7 @@ public class CombatUnitController: MonoBehaviour
 #endif
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
         m_MotorScript = GetComponent<Motor>();
+        m_HealthScript = GetComponent<Health>();
         CombatManager.Instance.AddUnit((int)m_MyTeam, this);
     }
     private void Start()
@@ -43,23 +45,27 @@ public class CombatUnitController: MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (m_JumpToTarget)
+        if (!CombatManager.Instance.m_IsCombatCompleted)
         {
-            JumpToTarget();
-        }
-        else if(!m_IsAttacking)
-        {
-            Movement();
+            if (m_JumpToTarget)
+            {
+                JumpToTarget();
+            }
+            else if (!m_IsAttacking)
+            {
+                Movement();
+            }
         }
     }
 
     private void Update()
     {
+        // attack Gizmo
         if (m_IsAttacking)
         {
-            Vector3 colorChangePoint = Vector3.Lerp(transform.position, m_CurrentAttackTarget.position, .5f);
+            Vector3 colorChangePoint = Vector3.Lerp(transform.position, m_CurrentAttackTarget.transform.position, .5f);
             Debug.DrawLine(transform.position, colorChangePoint, Color.green);
-            Debug.DrawLine(colorChangePoint, m_CurrentAttackTarget.position, Color.yellow);
+            Debug.DrawLine(colorChangePoint, m_CurrentAttackTarget.transform.position, Color.yellow);
         }
     }
 
@@ -69,25 +75,31 @@ public class CombatUnitController: MonoBehaviour
         if (!m_AttackCoolingDown)
         {
             // check Target
-            Transform newTarget = m_TargetFinder.GetAttackTarget(m_Enemies, targetPosition);
+            CombatUnitController newTarget = m_TargetFinder.GetAttackTarget(m_Enemies, targetPosition);
             if (newTarget != m_CurrentAttackTarget)
             {
                 m_CurrentAttackTarget = newTarget;
                 if(m_Type == CombatManager.UnitTypes.Assassin)
                 {
                     m_JumpToTarget = true;
-                    m_JumpTargetPosition = m_CurrentAttackTarget.position + 
-                        (m_CurrentAttackTarget.position - transform.position).normalized * CombatManager.Instance.m_AttackRanges[(int)m_Type];
+                    m_JumpTargetPosition = m_CurrentAttackTarget.transform.position + 
+                        (m_CurrentAttackTarget.transform.position - transform.position).normalized * CombatManager.Instance.m_AttackRanges[(int)m_Type];
                 }
             }
             // check attack range
-            if ((m_CurrentAttackTarget.position - transform.position).magnitude > CombatManager.Instance.m_AttackRanges[(int)m_Type])
+            if ((m_CurrentAttackTarget.transform.position - transform.position).magnitude > CombatManager.Instance.m_AttackRanges[(int)m_Type])
             {
-                m_MotorScript.MoveToPoint(m_CurrentAttackTarget.position);
+                m_MotorScript.MoveToPoint(m_CurrentAttackTarget.transform.position);
             }
             else
             {
-                // TODO: Attack
+                float targetCurrentHealth = m_CurrentAttackTarget.m_HealthScript.TakeDamage(CombatManager.Instance.m_AttackDamage[(int)m_Type]);
+                if(targetCurrentHealth <= 0)
+                {
+                    StartCoroutine(EliminateEnemy(m_CurrentAttackTarget));
+                    CombatManager.Instance.UnitDefeated(m_CurrentAttackTarget, (int)m_CurrentAttackTarget.m_MyTeam);
+                    return;
+                }
                 Debug.Log($"{gameObject.name} attack {m_CurrentAttackTarget.name}");
                 m_IsAttacking = true;
                 m_AttackCoolingDown = true;
@@ -98,9 +110,9 @@ public class CombatUnitController: MonoBehaviour
         {
             if(CombatManager.UnitTypes.Assassin == m_Type)
             {
-                if ((m_CurrentAttackTarget.position - transform.position).magnitude > CombatManager.Instance.m_AttackRanges[(int)m_Type])
+                if ((m_CurrentAttackTarget.transform.position - transform.position).magnitude > CombatManager.Instance.m_AttackRanges[(int)m_Type])
                 {
-                    m_MotorScript.MoveToPoint(m_CurrentAttackTarget.position);
+                    m_MotorScript.MoveToPoint(m_CurrentAttackTarget.transform.position);
                 }
             }
             m_MotorScript.MoveToPoint(targetPosition);
@@ -128,5 +140,11 @@ public class CombatUnitController: MonoBehaviour
         {
             m_JumpToTarget = false;
         }
+    }
+
+    private IEnumerator EliminateEnemy(CombatUnitController enemy)
+    {
+        yield return null;
+        enemy.gameObject.SetActive(false);
     }
 }
