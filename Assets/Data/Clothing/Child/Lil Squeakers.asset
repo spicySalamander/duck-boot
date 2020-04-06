@@ -10,11 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a0b12464516a7814cbb1234a83ec2906, type: 3}
-  m_Name: The Whack
+  m_Name: Lil Squeakers
   m_EditorClassIdentifier: 
-  name: The Whack
-  coolness: 0
-  cuteness: 0
-  strength: 6
-  speed: 0
+  name: 
+  strength: 7
+  speed: 2
   artwork: {fileID: 0}

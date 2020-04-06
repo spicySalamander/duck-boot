@@ -9,9 +9,9 @@ public class Clothing : ScriptableObject
     public new string name;
 
     // How COOL something is
-    public int coolness;
+    //public int coolness;
     // How CUTE something is
-    public int cuteness;
+    //public int cuteness;
 
     // How STRONG something is
     public int strength;
@@ -23,6 +23,6 @@ public class Clothing : ScriptableObject
 
     public void Print()
     {
-        Debug.Log(name + " - " + "This item is this cool: " + coolness + " this cute:" + cuteness + " this strong:" + strength + " this fast:" + speed);
+        Debug.Log(name + " - " + "This item is this strong: " + strength + " this fast:" + speed);
     }
 }
