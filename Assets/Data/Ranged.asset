@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0b12464516a7814cbb1234a83ec2906, type: 3}
-  m_Name: Hat - Cute
+  m_Script: {fileID: 11500000, guid: 41e66d3ed5a61f746b0a645b5d57308c, type: 3}
+  m_Name: Ranged
   m_EditorClassIdentifier: 
-  name: Cute
-  coolness: 0
-  cuteness: 10
-  strength: 0
-  speed: 0
+  sprite: {fileID: 21300000, guid: 15e67ff98fe32f447afa2eb5f7c511d5, type: 3}
+  attackDmg: 1
+  attackRange: 5
+  motorSpeed: 1
+  cooldown: 1
+  totalHealth: 10
