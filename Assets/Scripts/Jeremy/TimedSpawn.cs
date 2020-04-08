@@ -19,7 +19,7 @@ public class TimedSpawn : MonoBehaviour
 
     public void SpawnObject()
     {
-        Instantiate(spawnee, transform.position, transform.rotation);
+        Instantiate(spawnee, transform.position, Quaternion.identity);
         if (stopSpawning)
         {
             CancelInvoke("SpawnObejct");
