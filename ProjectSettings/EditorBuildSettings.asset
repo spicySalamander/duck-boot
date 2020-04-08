@@ -8,13 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Sample/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Scenes/00-Initialize.unity
-    guid: 1b01440deee3d504bbf03f143f6a2fab
-  - enabled: 1
-    path: Assets/Scenes/01-MenuScene.unity
-    guid: d64a82f1fa21f384293797b643a0e049
-  - enabled: 1
+  - enabled: 0
+    path: Assets/Scenes/Jeremy_2_scene.unity
+    guid: d5bbed0448d842444b2dba7e5e7b3eba
+  - enabled: 0
     path: Assets/Scenes/02-MainScreen.unity
     guid: 0184a497911087f42b1993ac0ad32e1b
   m_configObjects: {}
