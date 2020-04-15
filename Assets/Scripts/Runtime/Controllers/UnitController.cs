@@ -9,7 +9,7 @@ public class UnitController : MonoBehaviour
     public UnityEvent onCanMove;
     public DuckType type;
 
-    private void Start()
+    private void Awake()
     {
         GetComponent<Attack>().type = type;
         GetComponent<Health>().type = type;
