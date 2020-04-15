@@ -497,24 +497,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 96
   indentLevel: 0
-<<<<<<< Updated upstream
-  storyText: 'New Scene Start
-
-'
-  description: 
-  character: {fileID: 0}
-  portrait: {fileID: 0}
-  voiceOverClip: {fileID: 0}
-  showAlways: 1
-  showCount: 1
-  extendPrevious: 0
-  fadeWhenDone: 1
-  waitForClick: 1
-  stopVoiceover: 1
-  waitForVO: 0
-  setSayDialog: {fileID: 0}
-=======
->>>>>>> Stashed changes
 --- !u!114 &783401309
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -639,20 +621,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 783401307}
   m_Enabled: 1
   m_EditorHideFlags: 0
-<<<<<<< Updated upstream
-  m_Script: {fileID: 11500000, guid: 050fb9e6e72f442b3b883da8a965bdeb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 2
-  indentLevel: 0
-  targetFlowchart: {fileID: 0}
-  targetBlock: {fileID: 0}
-  startLabel:
-    stringRef: {fileID: 0}
-    stringVal: 
-  startIndex: 0
-  callMode: 0
-=======
   m_Script: {fileID: 11500000, guid: ec422cd568a9c4a31ad7c36d0572b9da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -672,7 +640,6 @@ MonoBehaviour:
   stopVoiceover: 1
   waitForVO: 0
   setSayDialog: {fileID: 0}
->>>>>>> Stashed changes
 --- !u!114 &783401315
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -5584,26 +5551,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18c5e8d46183346b59f64b820e71f97f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
-  nodeRect:
-    serializedVersion: 2
-    x: 232.50166
-    y: 66.711136
-    width: 199
-    height: 40
-  tint: {r: 1, g: 1, b: 1, a: 1}
-  useCustomTint: 0
-  itemId: 1
-  blockName: Caves
-  description: Executes when player acesses the Caves
-  eventHandler: {fileID: 783401313}
-  commandList:
-  - {fileID: 783401309}
-  - {fileID: 783401311}
-  - {fileID: 783401310}
-  - {fileID: 783401314}
---- !u!114 &783401316 stripped
-=======
   itemId: 104
   indentLevel: 0
   compareOperator: 0
@@ -5657,7 +5604,6 @@ MonoBehaviour:
     vector3Ref: {fileID: 0}
     vector3Val: {x: 0, y: 0, z: 0}
 --- !u!114 &783401493
->>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5997,9 +5943,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< Updated upstream
---- !u!1001 &1698045910
-=======
 --- !u!1 &1531749306
 GameObject:
   m_ObjectHideFlags: 0
@@ -6051,7 +5994,6 @@ Transform:
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1647454594
->>>>>>> Stashed changes
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -6270,8 +6212,6 @@ PrefabInstance:
       propertyPath: nodeRect.y
       value: 80.26384
       objectReference: {fileID: 0}
-<<<<<<< Updated upstream
-=======
     - target: {fileID: 11430050, guid: 5e7fbc8d4eb714b279eeeef2262c1e1a, type: 3}
       propertyPath: selectedBlocks.Array.size
       value: 1
@@ -6384,7 +6324,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
->>>>>>> Stashed changes
     m_RemovedComponents:
     - {fileID: 11462346, guid: 5e7fbc8d4eb714b279eeeef2262c1e1a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5e7fbc8d4eb714b279eeeef2262c1e1a, type: 3}
