@@ -8,13 +8,31 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Sample/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 0
+    path: Assets/Scenes/Jeremy_2_scene.unity
+    guid: d5bbed0448d842444b2dba7e5e7b3eba
   - enabled: 1
     path: Assets/Scenes/00-Initialize.unity
     guid: 1b01440deee3d504bbf03f143f6a2fab
   - enabled: 1
     path: Assets/Scenes/01-MenuScene.unity
     guid: d64a82f1fa21f384293797b643a0e049
+  - enabled: 0
+    path: Assets/__DELETED_GUID_Trash/0184a497911087f42b1993ac0ad32e1b
+    guid: 0184a497911087f42b1993ac0ad32e1b
   - enabled: 1
     path: Assets/Scenes/02-MainScreen.unity
-    guid: 0184a497911087f42b1993ac0ad32e1b
+    guid: c4cc8ab874766ac4488b6a8e8d40db0b
+  - enabled: 1
+    path: Assets/Scenes/Level-01.unity
+    guid: 4f50b2affa5047242bd3ebbe637438f4
+  - enabled: 1
+    path: Assets/Scenes/Level-02.unity
+    guid: da23f35c76fb1884aa26b3892b88af35
+  - enabled: 1
+    path: Assets/Scenes/Level-03.unity
+    guid: f3dbc939e2c4da5409d304656291e2b1
+  - enabled: 1
+    path: Assets/Scenes/Level-04.unity
+    guid: 4d888d9ab5bb7d342ba187d86fd97174
   m_configObjects: {}
