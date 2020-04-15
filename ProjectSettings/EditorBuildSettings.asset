@@ -21,9 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/02-MainScreen.unity
     guid: 0184a497911087f42b1993ac0ad32e1b
   - enabled: 1
-    path: Assets/Scenes/FUNgus.unity
+    path: Assets/Scenes/02-MainScreen.unity
     guid: c4cc8ab874766ac4488b6a8e8d40db0b
   - enabled: 1
-    path: Assets/Scenes/03-Level.unity
+    path: Assets/Scenes/Level-01.unity
     guid: 4f50b2affa5047242bd3ebbe637438f4
   m_configObjects: {}
