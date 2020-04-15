@@ -26,12 +26,26 @@ public class Move : Unit
 
     protected override void SetupFacingRight()
     {
-        rb.position += Vector2.right * motorSpeed * Time.fixedDeltaTime;
+        //rb.position += Vector2.right * motorSpeed * Time.fixedDeltaTime;
+        rb.velocity = Vector2.right * motorSpeed;
+
+        if (GetComponent<Animator>())
+        {
+            GetComponent<Animator>().SetFloat("Speed", 1);
+        }
+
     }
 
     protected override void SetupFacingLeft()
     {
-        rb.position += Vector2.left * motorSpeed * Time.fixedDeltaTime;
-        transform.localScale = new Vector3(-1, 1, 1);
+        //rb.position += Vector2.left * motorSpeed * Time.fixedDeltaTime;
+        rb.velocity = Vector2.left * motorSpeed;
+
+        if (GetComponent<Animator>())
+        {
+            GetComponent<Animator>().SetFloat("Speed", 1);
+        }
+
+        //transform.localScale = new Vector3(-1, 1, 1);
     }
 }

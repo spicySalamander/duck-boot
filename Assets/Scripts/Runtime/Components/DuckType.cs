@@ -11,4 +11,6 @@ public class DuckType : ScriptableObject
     public float motorSpeed;
     public float cooldown;
     public int totalHealth;
+
+    public RuntimeAnimatorController anim;
 }

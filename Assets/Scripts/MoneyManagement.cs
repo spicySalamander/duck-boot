@@ -14,7 +14,7 @@ public class MoneyManagement : MonoBehaviour
 
     public int moneyPerSecond;
     public int currentMoney;
-    public int delayAmount = 2; // Seconds counted
+    public float delayAmount = 2; // Seconds counted
     Text currentMoneyText;
 
     float Timer;

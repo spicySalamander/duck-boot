@@ -19,6 +19,18 @@ public class UnitController : MonoBehaviour
         GetComponent<Attack>().onKill.AddListener(StartMovement);
 
         GetComponent<SpriteRenderer>().sprite = type.sprite;
+        GetComponent<Animator>().runtimeAnimatorController = type.anim;
+    }
+
+    public void ChangeType(DuckType duckType)
+    {
+        type = duckType;
+
+        GetComponent<Attack>().type = type;
+        GetComponent<Health>().type = type;
+        GetComponent<Move>().type = type;
+
+        GetComponent<SpriteRenderer>().sprite = type.sprite;
     }
 
     void StopMovement()

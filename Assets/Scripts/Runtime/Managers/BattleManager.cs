@@ -21,11 +21,11 @@ public class BattleManager : MonoBehaviour
     public void DuckBattle()
     {
         FindObjectOfType<ProgressManager>().CompleteLevel();
-        SceneManager.LoadScene("FUNgus");
+        SceneManager.LoadScene("02-MainScreen");
     }
 
     public void EnemyBattle()
     {
-        SceneManager.LoadScene("FUNgus");
+        SceneManager.LoadScene("02-MainScreen");
     }
 }

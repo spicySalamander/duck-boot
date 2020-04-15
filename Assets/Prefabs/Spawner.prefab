@@ -44,6 +44,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnee: {fileID: 7835082652528100699, guid: ad296264022c6ed448bd8fd85c96ee79, type: 3}
+  type:
+  - {fileID: 11400000, guid: 57fbe3d9c9723ef41b9841482c77a730, type: 2}
+  - {fileID: 11400000, guid: d9453c07401ca0148a13c81719e0085c, type: 2}
+  - {fileID: 11400000, guid: a8236d5f4dcbce94694604da558d016e, type: 2}
+  numOfTanks: 3
+  numOfRanged: 3
+  numOfMelee: 3
   stopSpawning: 0
   spawnTime: 1
   spawnDelay: 4

@@ -18,3 +18,4 @@ MonoBehaviour:
   motorSpeed: 1
   cooldown: 1
   totalHealth: 10
+  anim: {fileID: 9100000, guid: 93ad80411fdcaa44dab2c9805311517b, type: 2}

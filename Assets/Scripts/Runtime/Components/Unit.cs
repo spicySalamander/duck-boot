@@ -31,6 +31,11 @@ public abstract class Unit : MonoBehaviour
                 SetupFacingLeft();
                 break;
             default:
+                if (GetComponent<Animator>())
+                {
+                    GetComponent<Animator>().SetFloat("Speed", 0);
+                }
+                rb.velocity = Vector2.zero;
                 break;
         }
     }
