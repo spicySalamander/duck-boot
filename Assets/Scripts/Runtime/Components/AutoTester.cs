@@ -18,7 +18,7 @@ public class AutoTester : MonoBehaviour
     {
         if (test)
         {
-            //obj.MoveToTarget(gameObject, 5f);
+            obj.MoveToTarget(gameObject, 5f);
             //obj.TakeDamage(5);
             //test = !test;
         }

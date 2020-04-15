@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class SceneManagement : MonoBehaviour
+public class SceneManagement : PersistentSingleton<SceneManagement>
 {
     //portable FSM soon to be implemented
     public enum SceneState { Launch, Menu, Game, Combat, Fashion, Credits, Reset }
