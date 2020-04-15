@@ -47,7 +47,7 @@ public class Attack : Unit
         RaycastHit2D hit = Physics2D.Linecast(rb.position, new Vector2(rb.position.x + attackRange, rb.position.y), LayerMask.GetMask(enemyLayer));
         if (hit)
         {
-            target = hit.rigidbody.gameObject.GetComponent<Health>();
+            target = hit.collider.gameObject.GetComponent<Health>();
 
             if (!tripped)
             {

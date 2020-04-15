@@ -32,5 +32,6 @@ public class Move : Unit
     protected override void SetupFacingLeft()
     {
         rb.position += Vector2.left * motorSpeed * Time.fixedDeltaTime;
+        transform.localScale = new Vector3(-1, 1, 1);
     }
 }
